@@ -1,5 +1,6 @@
 package org.mtc.hr.controller.config;
 
+import io.swagger.annotations.ApiOperation;
 import org.mtc.hr.model.Menu;
 import org.mtc.hr.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class SystemConfigController {
     @Autowired
     MenuService menuService;
     @GetMapping("/menu")
+    @ApiOperation("Get Menu")
     public List<Menu> getMenusByHrId() {
         return menuService.getMenusByHrId();
     }

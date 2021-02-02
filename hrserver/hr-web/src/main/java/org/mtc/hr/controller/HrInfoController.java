@@ -1,5 +1,7 @@
 package org.mtc.hr.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.mtc.hr.config.FastDFSUtils;
 import org.mtc.hr.model.Hr;
 import org.mtc.hr.model.RespBean;
@@ -29,11 +31,13 @@ public class HrInfoController {
     String nginxHost;
 
     @GetMapping("/hr/info")
+    @ApiOperation("Get HR Info")
     public Hr getCurrentHr(Authentication authentication) {
         return ((Hr) authentication.getPrincipal());
     }
 
     @PutMapping("/hr/info")
+    @ApiOperation("Update HR Info")
     public RespBean updateHr(@RequestBody Hr hr, Authentication authentication) {
         if (hrService.updateHr(hr) == 1) {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(hr, authentication.getCredentials(), authentication.getAuthorities()));
@@ -43,6 +47,7 @@ public class HrInfoController {
     }
 
     @PutMapping("/hr/pass")
+    @ApiOperation("Update HR Password")
     public RespBean updateHrPasswd(@RequestBody Map<String, Object> info) {
         String oldpass = (String) info.get("oldpass");
         String pass = (String) info.get("pass");
@@ -54,6 +59,7 @@ public class HrInfoController {
     }
 
     @PostMapping("/hr/userface")
+    @ApiOperation("Update HR User Face")
     public RespBean updateHrUserface(MultipartFile file, Integer id,Authentication authentication) {
         String fileId = FastDFSUtils.upload(file);
         String url = nginxHost + fileId;

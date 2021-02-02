@@ -1,5 +1,7 @@
 package org.mtc.hr.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.mtc.hr.config.VerificationCode;
 import org.mtc.hr.model.RespBean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,13 @@ import java.io.IOException;
 @RestController
 public class LoginController {
     @GetMapping("/login")
+    @ApiOperation("login")
     public RespBean login() {
         return RespBean.error("尚未登录，请登录!");
     }
 
     @GetMapping("/verifyCode")
+    @ApiOperation("Verify Code")
     public void verifyCode(HttpServletRequest request, HttpServletResponse resp) throws IOException {
         VerificationCode code = new VerificationCode();
         BufferedImage image = code.getImage();

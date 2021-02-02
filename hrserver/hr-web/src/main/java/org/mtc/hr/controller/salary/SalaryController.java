@@ -1,5 +1,7 @@
 package org.mtc.hr.controller.salary;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.mtc.hr.model.RespBean;
 import org.mtc.hr.model.Salary;
 import org.mtc.hr.service.SalaryService;
@@ -15,11 +17,13 @@ public class SalaryController {
     SalaryService salaryService;
 
     @GetMapping("/")
+    @ApiOperation("Get Salaries")
     public List<Salary> getAllSalaries() {
         return salaryService.getAllSalaries();
     }
 
     @PostMapping("/")
+    @ApiOperation("Add Salary")
     public RespBean addSalary(@RequestBody Salary salary) {
         if (salaryService.addSalary(salary) == 1) {
             return RespBean.ok("添加成功!");
@@ -28,6 +32,7 @@ public class SalaryController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("Delete Salary")
     public RespBean deleteSalaryById(@PathVariable Integer id) {
         if (salaryService.deleteSalaryById(id) == 1) {
             return RespBean.ok("删除成功！");
@@ -36,6 +41,7 @@ public class SalaryController {
     }
 
     @PutMapping("/")
+    @ApiOperation("Update Salary")
     public RespBean updateSalaryById(@RequestBody Salary salary) {
         if (salaryService.updateSalaryById(salary) == 1) {
             return RespBean.ok("更新成功!");

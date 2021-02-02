@@ -1,5 +1,7 @@
 package org.mtc.hr.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.mtc.hr.model.ChatMsg;
 import org.mtc.hr.model.Hr;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ public class WsController {
     SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/ws/chat")
+    @ApiOperation(("Chat"))
     public void handleMsg(Authentication authentication, ChatMsg chatMsg) {
         Hr hr = (Hr) authentication.getPrincipal();
         chatMsg.setFrom(hr.getUsername());

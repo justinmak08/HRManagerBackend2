@@ -16,7 +16,7 @@ public class ChatController {
     @Autowired
     HrService hrService;
     @GetMapping("/hrs")
-    @ApiOperation("hrs")
+    @ApiOperation("Get Hours")
     public List<Hr> getAllHrs() {
         return hrService.getAllHrsExceptCurrentHr();
     }
