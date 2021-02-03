@@ -7,6 +7,7 @@ import org.mtc.hr.service.HrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -49,7 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/js/**", "/index.html", "/img/**", "/fonts/**", "/favicon.ico", "/verifyCode", "/swagger-ui.html");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/index.html", "/img/**", "/fonts/**", "/favicon.ico", "/verifyCode")
+                .antMatchers("/swagger-ui.html",
+                        "/v2/api-docs", // swagger api json
+                        "/swagger-resources/configuration/ui", // 用来获取支持的动作
+                        "/swagger-resources", // 用来获取api-docs的URI
+                        "/swagger-resources/configuration/security", // 安全选项
+                        "/swagger-resources/**");
     }
 
     @Bean
@@ -103,6 +110,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .antMatchers("/swagger-ui.html",
+                        "/v2/api-docs", // swagger api json
+                        "/swagger-resources/configuration/ui", // 用来获取支持的动作
+                        "/swagger-resources", // 用来获取api-docs的URI
+                        "/swagger-resources/configuration/security", // 安全选项
+                        "/swagger-resources/**").permitAll()
+                //"/login"不进行权限验证
+                .anyRequest().authenticated()   //其他的需要登陆后才能访问
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O object) {

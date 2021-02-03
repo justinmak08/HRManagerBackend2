@@ -14,7 +14,7 @@ spring:
     host: 127.0.0.1
     database: 0
     port: 6379
-    password:
+    password: '123456'
   cache:
     cache-names: menus_cache
 server:
@@ -24,3 +24,5 @@ server:
 fastdfs:
   nginx:
     host: http://192.168.91.128/
+swagger:
+  enable: true
