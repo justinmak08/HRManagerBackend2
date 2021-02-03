@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mtc.hr.mapper.TeamsMapper">
+    <resultMap id="BaseResultMap" type="org.mtc.hr.model.Teams">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="manager" column="manager"/>
+        <result property="analyst" column="analyst"/>
+        <result property="designer" column="designer"/>
+        <result property="tester" column="tester"/>
+    </resultMap>
+
+    <select id="find" resultMap="BaseResultMap">
+        select * from teams limit #{param1},#{param2}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(*) from book
+    </select>
+
+    <insert id="save" parameterType="org.mtc.hr.model.Teams">
+        insert into teams(id,name,manager,analyst,designer,programmer,tester) values(#{id},#{name},#{manager},
+        #{analyst},#{designer},#{programmer},#{tester})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from teams where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from teams where id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.mtc.hr.model.Teams">
+        update teams set name=#{name},manager=#{manager},analyst=#{analyst},designer=#{designer},
+        programmer=#{programmer},tester=#{tester} where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mtc.hr.mapper.PersonnelMapper">
+    <resultMap id="BaseResultMap" type="org.mtc.hr.model.Personnel">
+        <id property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="acceptDate" column="acceptDate"/>
+        <result property="title" column="title"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="birthdate" column="birthdate"/>
+        <result property="nationality" column="nationality"/>
+        <result property="salary" column="salary"/>
+        <result property="accounting" column="accounting"/>
+        <result property="skill" column="skill"/>
+        <result property="admin" column="admin"/>
+        <result property="logged" column="logged"/>
+    </resultMap>
+
+    <select id="count" resultType="Integer">
+        select count(*) from personnel
+    </select>
+
+    <select id="find" resultMap="BaseResultMap">
+        select * from personnel limit #{param1},#{param2}
+    </select>
+
+    <insert id="save" parameterType="org.mtc.hr.model.Personnel">
+        insert into personnel(id,number,acceptDate,title,first_name,last_name,email,password,phone,birthdate,nationality,
+        salary,accounting,skill,admin,logged) values(#{id},#{number},#{acceptDate},#{title},#{firstName},#{lastName},
+        #{email},#{password},#{phone},#{birthdate},#{nationality},#{salary},#{accounting},#{skill},#{admin},#{logged})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from personnel where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from personnel where id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.mtc.hr.model.Personnel">
+        update personnel set number=#{number},acceptDate=#{acceptDate},title=#{title},first_name=#{firstName},
+        last_name=#{lastName},email=#{email},password=#{password},phone=#{phone},birthdate=#{birthdate},
+        nationality=#{nationality},salary=#{salary},accounting=#{accounting},skill=#{skill},admin=#{admin},
+        logged=#{logged} where id = #{id}
+    </update>
+</mapper>

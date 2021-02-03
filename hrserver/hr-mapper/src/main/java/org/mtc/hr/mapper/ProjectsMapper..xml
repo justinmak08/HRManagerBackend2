@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mtc.hr.mapper.ProjectsMapper">
+    <resultMap id="BaseResultMap" type="org.mtc.hr.model.Projects">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="language" column="language"/>
+        <result property="teamId" column="team_id"/>
+        <result property="startDate" column="startDate"/>
+        <result property="dueDate" column="dueDate"/>
+        <result property="creationDate" column="creationDate"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <select id="count" resultType="Integer">
+        select count(*) from projects
+    </select>
+
+    <select id="find" resultMap="BaseResultMap">
+        select * from projects limit #{param1},#{param2}
+    </select>
+
+    <insert id="save" parameterType="org.mtc.hr.model.Projects">
+        insert into projects(id,name,language,team_id,startDate,dueDate,creationDate,description) values(#{id},#{name},
+        #{language},#{teamId},#{startDate},#{dueDate},#{creationDate},#{description})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from projects where id = #{id}
+    </delete>
+
+    <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from projects where id = #{id}
+    </select>
+
+    <update id="update" parameterType="org.mtc.hr.model.Projects">
+        update projects set name=#{name},language=#{language},team_id=#{teamId},startDate=#{startDate},
+        dueDate=#{dueDate},creationDate=#{creationDate},description=#{description} where id = #{id}
+    </update>
+</mapper>
