@@ -198,4 +198,27 @@
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getMenuByPage" resultMap="BaseResultMap">
+    select m1.`id` as id1,m1.`url` as url,m1.`path` as path,m1.`component` as component,m1.`name` as name,m1.`iconCls` as iconCls,m1.`keepAlive` as keepAlive,
+        m1.`requireAuth` as requireAuth,m1.`parentId` as parentId,m1.`enabled` as enabled
+        from menu m1
+        where m1.`enabled`=true
+    <if test="menu.name !=null and menu.name!=''">
+      and m1.name like concat('%',#{menu.name},'%')
+    </if>
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from menu m
+    <where>
+      <if test="menu!=null">
+        <if test="menu.name !=null and menu.name!=''">
+          and m.name like concat('%',#{menu.name},'%')
+        </if>
+      </if>
+    </where>
+  </select>
 </mapper>

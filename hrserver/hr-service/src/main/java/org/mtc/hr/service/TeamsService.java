@@ -1,4 +1,4 @@
-package org.mtc.hr.config.service.impl;
+package org.mtc.hr.service;
 
 import org.mtc.hr.model.Teams;
 import org.mtc.hr.model.TeamsVO;

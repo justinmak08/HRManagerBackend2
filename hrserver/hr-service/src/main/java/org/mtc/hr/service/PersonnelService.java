@@ -1,4 +1,4 @@
-package org.mtc.hr.config.service.impl;
+package org.mtc.hr.service;
 
 import org.mtc.hr.model.Personnel;
 import org.mtc.hr.model.PersonnelVO;

@@ -1,7 +1,10 @@
 package org.mtc.hr.mapper;
 
+import org.apache.ibatis.annotations.Param;
+import org.mtc.hr.model.Employee;
 import org.mtc.hr.model.Menu;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MenuMapper {
@@ -24,4 +27,8 @@ public interface MenuMapper {
     List<Menu> getAllMenus();
 
     List<Integer> getMidsByRid(Integer rid);
+
+    List<Menu> getMenuByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("menu") Menu menu);
+
+    Long getTotal(@Param("menu") Menu menu);
 }

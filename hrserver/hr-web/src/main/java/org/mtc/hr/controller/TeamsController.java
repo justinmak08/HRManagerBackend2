@@ -1,6 +1,6 @@
 package org.mtc.hr.controller;
 
-import org.mtc.hr.config.service.impl.TeamsService;
+import org.mtc.hr.service.TeamsService;
 import org.mtc.hr.model.Teams;
 import org.mtc.hr.model.TeamsVO;
 import io.swagger.annotations.Api;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api
-@RequestMapping("/teams")
+@RequestMapping("/teams/basic")
 public class TeamsController {
 
     @Autowired

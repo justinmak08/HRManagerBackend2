@@ -1,6 +1,6 @@
 package org.mtc.hr.controller;
 
-import org.mtc.hr.config.service.impl.PersonnelService;
+import org.mtc.hr.service.PersonnelService;
 import org.mtc.hr.model.Personnel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api
-@RequestMapping("/employee")
+@RequestMapping("/personnel/basic")
 public class PersonnelController {
 
     @Autowired

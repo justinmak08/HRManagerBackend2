@@ -1,6 +1,6 @@
 package org.mtc.hr.controller;
 
-import org.mtc.hr.config.service.impl.ProjectsService;
+import org.mtc.hr.service.ProjectsService;
 import org.mtc.hr.model.Projects;
 import org.mtc.hr.model.ProjectsVO;
 import io.swagger.annotations.Api;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api
-@RequestMapping("/projects")
+@RequestMapping("/projects/basic")
 public class ProjectsController {
 
     @Autowired
