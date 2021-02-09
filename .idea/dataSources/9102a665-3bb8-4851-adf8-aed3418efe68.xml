@@ -2089,23 +2089,23 @@ ALL PRIVILEGES|mtc\_stocking!
     </column>
     <column id="529" parent="271" name="manager">
       <Position>3</Position>
-      <DataType>int(255)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="530" parent="271" name="analyst">
       <Position>4</Position>
-      <DataType>int(255)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="531" parent="271" name="designer">
       <Position>5</Position>
-      <DataType>int(255)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="532" parent="271" name="programmer">
       <Position>6</Position>
-      <DataType>int(255)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="533" parent="271" name="tester">
       <Position>7</Position>
-      <DataType>int(255)|0s</DataType>
+      <DataType>varchar(255)|0s</DataType>
     </column>
     <column id="534" parent="272" name="username">
       <Position>1</Position>

@@ -7,6 +7,8 @@ import org.mtc.hr.utils.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonnelService {
     @Autowired 
@@ -38,5 +40,9 @@ public class PersonnelService {
 
     public Integer update(Personnel personnel) {
         return personnelMapper.update(personnel);
+    }
+
+    public List<Personnel> getPersonnelByTitle(String title) {
+        return personnelMapper.getPersonnelByTitle(title);
     }
 }

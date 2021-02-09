@@ -3,11 +3,11 @@ package org.mtc.hr.model;
 public class Teams {
     private String id;
     private String name;
-    private int manager;
-    private int analyst;
-    private int designer;
-    private int programmer;
-    private int tester;
+    private String manager;
+    private String analyst;
+    private String designer;
+    private String programmer;
+    private String tester;
 
     public String getId() {
         return id;
@@ -25,43 +25,43 @@ public class Teams {
         this.name = name;
     }
 
-    public int getManager() {
+    public String getManager() {
         return manager;
     }
 
-    public void setManager(int manager) {
+    public void setManager(String manager) {
         this.manager = manager;
     }
 
-    public int getAnalyst() {
+    public String getAnalyst() {
         return analyst;
     }
 
-    public void setAnalyst(int analyst) {
+    public void setAnalyst(String analyst) {
         this.analyst = analyst;
     }
 
-    public int getDesigner() {
+    public String getDesigner() {
         return designer;
     }
 
-    public void setDesigner(int designer) {
+    public void setDesigner(String designer) {
         this.designer = designer;
     }
 
-    public int getProgrammer() {
+    public String getProgrammer() {
         return programmer;
     }
 
-    public void setProgrammer(int programmer) {
+    public void setProgrammer(String programmer) {
         this.programmer = programmer;
     }
 
-    public int getTester() {
+    public String getTester() {
         return tester;
     }
 
-    public void setTester(int tester) {
+    public void setTester(String tester) {
         this.tester = tester;
     }
 

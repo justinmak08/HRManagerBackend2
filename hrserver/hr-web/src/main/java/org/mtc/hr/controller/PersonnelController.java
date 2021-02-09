@@ -8,6 +8,8 @@ import org.mtc.hr.model.PersonnelVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Api
 @RequestMapping("/personnel/basic")
@@ -38,6 +40,12 @@ public class PersonnelController {
     @ApiOperation(("findById"))
     public Personnel findById(@PathVariable("id") String id){
         return personnelService.findById(id);
+    }
+
+    @GetMapping("getPersonnelByTitle/{title}")
+    @ApiOperation("getPersonnelByTitle")
+    public List<Personnel> getPersonnelByTitle(@PathVariable("title") String title) {
+        return personnelService.getPersonnelByTitle(title);
     }
 
     @PutMapping("/employeeUpdate")

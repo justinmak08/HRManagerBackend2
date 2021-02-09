@@ -41,6 +41,10 @@
         select * from personnel where id = #{id}
     </select>
 
+    <select id="getPersonnelByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from personnel where title = #{title}
+    </select>
+
     <update id="update" parameterType="org.mtc.hr.model.Personnel">
         update personnel set number=#{number},acceptDate=#{acceptDate},title=#{title},first_name=#{firstName},
         last_name=#{lastName},email=#{email},password=#{password},phone=#{phone},birthdate=#{birthdate},

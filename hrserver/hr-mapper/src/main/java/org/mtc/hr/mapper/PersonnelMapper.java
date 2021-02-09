@@ -11,4 +11,5 @@ public interface PersonnelMapper {
     public boolean deleteById(String id);
     public Personnel findById(String id);
     public Integer update(Personnel employee);
+    public List<Personnel> getPersonnelByTitle(String title);
 }
