@@ -11,4 +11,5 @@ public interface TeamsMapper {
     public Teams findById(String id);
     public Integer update(Teams teams);
     public List<Teams> find(Integer index, Integer limit);
+    public List<Teams> getTeams();
 }

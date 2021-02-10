@@ -25,6 +25,71 @@ import java.util.List;
  */
 public class POIUtils {
 
+    public static ResponseEntity<byte[]> teams2Excel(List<Teams> list) {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        workbook.createInformationProperties();
+        DocumentSummaryInformation docInfo = workbook.getDocumentSummaryInformation();
+        docInfo.setCategory("Teams");
+        SummaryInformation summInfo = workbook.getSummaryInformation();
+        summInfo.setTitle("Teams Spreadsheet");
+        HSSFCellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFillForegroundColor(IndexedColors.YELLOW.index);
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        HSSFCellStyle dateCellStyle = workbook.createCellStyle();
+        dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy"));
+        HSSFSheet sheet = workbook.createSheet("Teams Spreadsheet");
+
+        for (int i = 0; i<7; i++) {
+            sheet.setColumnWidth(i, 15 * 256);
+        }
+
+        HSSFRow r0 = sheet.createRow(0);
+        HSSFCell c0 = r0.createCell(0);
+        c0.setCellValue("ID");
+        c0.setCellStyle(headerStyle);
+        HSSFCell c1 = r0.createCell(1);
+        c1.setCellStyle(headerStyle);
+        c1.setCellValue("Name");
+        HSSFCell c2 = r0.createCell(2);
+        c2.setCellStyle(headerStyle);
+        c2.setCellValue("Manager");
+        HSSFCell c3 = r0.createCell(3);
+        c3.setCellStyle(headerStyle);
+        c3.setCellValue("Analyst");
+        HSSFCell c4 = r0.createCell(4);
+        c4.setCellStyle(headerStyle);
+        c4.setCellValue("Designer");
+        HSSFCell c5 = r0.createCell(5);
+        c5.setCellStyle(headerStyle);
+        c5.setCellValue("Programmer");
+        HSSFCell c6 = r0.createCell(6);
+        c6.setCellStyle(headerStyle);
+        c6.setCellValue("Tester");
+
+        for (int i = 0; i < list.size(); i++) {
+            Teams teams = list.get(i);
+            HSSFRow row = sheet.createRow(i + 1);
+            row.createCell(0).setCellValue(teams.getId());
+            row.createCell(1).setCellValue(teams.getName());
+            row.createCell(2).setCellValue(teams.getManager());
+            row.createCell(3).setCellValue(teams.getAnalyst());
+            row.createCell(4).setCellValue(teams.getDesigner());
+            row.createCell(5).setCellValue(teams.getProgrammer());
+            row.createCell(6).setCellValue(teams.getTester());
+        }
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        HttpHeaders headers = new HttpHeaders();
+        try {
+            headers.setContentDispositionFormData("attachment", new String("teams.xls".getBytes("UTF-8"), "ISO-8859-1"));
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            workbook.write(byteArrayOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<byte[]>(byteArrayOutputStream.toByteArray(), headers, HttpStatus.CREATED);
+    }
+
     public static ResponseEntity<byte[]> employee2Excel(List<Employee> list) {
         //1. 创建一个 Excel 文档
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -54,6 +119,7 @@ public class POIUtils {
         HSSFCellStyle dateCellStyle = workbook.createCellStyle();
         dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy"));
         HSSFSheet sheet = workbook.createSheet("员工信息表");
+
         //设置列的宽度
         sheet.setColumnWidth(0, 5 * 256);
         sheet.setColumnWidth(1, 12 * 256);

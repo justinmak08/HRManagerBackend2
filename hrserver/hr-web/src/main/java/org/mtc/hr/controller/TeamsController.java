@@ -1,12 +1,17 @@
 package org.mtc.hr.controller;
 
+import org.mtc.hr.model.Employee;
 import org.mtc.hr.service.TeamsService;
 import org.mtc.hr.model.Teams;
 import org.mtc.hr.model.TeamsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.mtc.hr.utils.POIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Api
@@ -20,6 +25,12 @@ public class TeamsController {
     @ApiOperation(("findByPage"))
     public TeamsVO findByPage(@PathVariable("page") Integer page){
         return teamsService.findByPage(page);
+    }
+
+    @GetMapping("/getTeams")
+    @ApiOperation(("getTeams"))
+    public List<Teams> getTeams() {
+        return teamsService.getTeams();
     }
 
     @PostMapping("/save")
@@ -44,5 +55,11 @@ public class TeamsController {
     @ApiOperation(("teamsUpdate"))
     public Integer update(@RequestBody Teams teams){
         return teamsService.update(teams);
+    }
+
+    @GetMapping("/export")
+    @ApiOperation("Export Employee Data")
+    public ResponseEntity<byte[]> exportData() {
+        return POIUtils.teams2Excel(teamsService.getTeams());
     }
 }

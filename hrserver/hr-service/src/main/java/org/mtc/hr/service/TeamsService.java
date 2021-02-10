@@ -7,6 +7,8 @@ import org.mtc.hr.utils.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamsService {
     @Autowired
@@ -34,6 +36,10 @@ public class TeamsService {
 
     public Teams findById(String id) {
         return teamsMapper.findById(id);
+    }
+
+    public List<Teams> getTeams() {
+        return teamsMapper.getTeams();
     }
 
 

@@ -14,6 +14,10 @@
         select * from teams limit #{param1},#{param2}
     </select>
 
+    <select id="getTeams" resultMap="BaseResultMap">
+        select * from teams
+    </select>
+
     <select id="count" resultType="Integer">
         select count(*) from book
     </select>
