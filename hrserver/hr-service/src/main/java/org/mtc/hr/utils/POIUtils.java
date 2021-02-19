@@ -276,6 +276,63 @@ public class POIUtils {
         return new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.CREATED);
     }
 
+    public static List<Teams> excel2Teams(MultipartFile file) {
+        List<Teams> list = new ArrayList<>();
+        Teams teams = null;
+        try {
+            HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+                HSSFSheet sheet = workbook.getSheetAt(i);
+                for (int j = 0; j < sheet.getPhysicalNumberOfRows(); j++) {
+                    if (j == 0) {
+                        continue;
+                    }
+                    HSSFRow row = sheet.getRow(j);
+                    if (row == null) {
+                        continue;
+                    }
+                    teams = new Teams();
+                    for (int k = 0; k < row.getPhysicalNumberOfCells(); k++) {
+                        HSSFCell cell = row.getCell(k);
+                        switch (cell.getCellType()) {
+                            case STRING:
+                                String cellValue = cell.getStringCellValue();
+                                switch (k) {
+                                    case 0:
+                                        teams.setId(cellValue);
+                                        break;
+                                    case 1:
+                                        teams.setName(cellValue);
+                                        break;
+                                    case 2:
+                                        teams.setManager(cellValue);
+                                        break;
+                                    case 3:
+                                        teams.setAnalyst(cellValue);
+                                        break;
+                                    case 4:
+                                        teams.setDesigner(cellValue);
+                                        break;
+                                    case 5:
+                                        teams.setProgrammer(cellValue);
+                                        break;
+                                    case 6:
+                                        teams.setTester(cellValue);
+                                        break;
+                                }
+                            break;
+                        }
+                    }
+                    list.add(teams);
+                }
+            }
+
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return list;
+    }
+
     /**
      * Excel 解析成 员工数据集合
      *

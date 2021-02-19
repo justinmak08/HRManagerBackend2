@@ -1,6 +1,6 @@
 package org.mtc.hr.controller;
 
-import org.mtc.hr.model.Employee;
+import org.mtc.hr.model.RespBean;
 import org.mtc.hr.service.TeamsService;
 import org.mtc.hr.model.Teams;
 import org.mtc.hr.model.TeamsVO;
@@ -10,7 +10,9 @@ import org.mtc.hr.utils.POIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -61,5 +63,16 @@ public class TeamsController {
     @ApiOperation("Export Employee Data")
     public ResponseEntity<byte[]> exportData() {
         return POIUtils.teams2Excel(teamsService.getTeams());
+    }
+
+    @PostMapping("/import")
+    @ApiOperation("Import Employee Data")
+    public RespBean importData(MultipartFile file) throws IOException {
+        List<Teams> list = POIUtils.excel2Teams(file);
+
+        if (teamsService.addTeams(list) == list.size()) {
+            return RespBean.ok("上传成功");
+        }
+        return RespBean.error("上传失败");
     }
 }

@@ -27,6 +27,16 @@
         #{analyst},#{designer},#{programmer},#{tester})
     </insert>
 
+    <insert id="addTeams">
+        insert into teams (id, name, manager, analyst, designer, programmer, tester)
+        values
+        <foreach collection="list" separator="," item="team">
+            (#{team.id,jdbcType=VARCHAR}, #{team.name,jdbcType=VARCHAR}, #{team.manager,jdbcType=VARCHAR},
+            #{team.analyst,jdbcType=VARCHAR}, #{team.designer,jdbcType=VARCHAR}, #{team.programmer,jdbcType=VARCHAR},
+            #{team.tester,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
     <delete id="deleteById" parameterType="java.lang.String">
         delete from teams where id = #{id}
     </delete>
@@ -34,6 +44,10 @@
     <select id="findById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from teams where id = #{id}
     </select>
+
+<!--    <select id="getIds" parameterType="java.util.List" resultMap="BaseResultMap">-->
+<!--        select id from teams where IS not null-->
+<!--    </select>-->
 
     <update id="update" parameterType="org.mtc.hr.model.Teams">
         update teams set name=#{name},manager=#{manager},analyst=#{analyst},designer=#{designer},
