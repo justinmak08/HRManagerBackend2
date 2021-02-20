@@ -1,6 +1,8 @@
 package org.mtc.hr.controller;
 
+import org.mtc.hr.model.Personnel;
 import org.mtc.hr.model.RespBean;
+import org.mtc.hr.service.PersonnelService;
 import org.mtc.hr.service.TeamsService;
 import org.mtc.hr.model.Teams;
 import org.mtc.hr.model.TeamsVO;
@@ -22,6 +24,8 @@ public class TeamsController {
 
     @Autowired
     private TeamsService teamsService;
+    @Autowired
+    private PersonnelService personnelService;
 
     @GetMapping("/findByPage/{page}")
     @ApiOperation(("findByPage"))
@@ -33,6 +37,12 @@ public class TeamsController {
     @ApiOperation(("getTeams"))
     public List<Teams> getTeams() {
         return teamsService.getTeams();
+    }
+
+    @GetMapping("/getPersonnel")
+    @ApiOperation(("getPersonnel"))
+    public List<Personnel> getAllPersonnel() {
+        return personnelService.getAllPersonnel();
     }
 
     @PostMapping("/save")

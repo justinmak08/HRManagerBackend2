@@ -23,6 +23,10 @@
         select count(*) from personnel
     </select>
 
+    <select id="getAllPersonnel" resultMap="BaseResultMap">
+        select * from personnel
+    </select>
+
     <select id="find" resultMap="BaseResultMap">
         select * from personnel limit #{param1},#{param2}
     </select>

@@ -24,6 +24,10 @@ public class PersonnelService {
         return personnelVO;
     }
 
+    public List<Personnel> getAllPersonnel() {
+        return personnelMapper.getAllPersonnel();
+    }
+
     public Integer save(Personnel personnel) {
         String employeeId = UUIDGenerator.getId();
         personnel.setId(employeeId);

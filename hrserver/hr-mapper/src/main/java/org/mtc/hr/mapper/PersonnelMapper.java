@@ -12,4 +12,5 @@ public interface PersonnelMapper {
     public Personnel findById(String id);
     public Integer update(Personnel employee);
     public List<Personnel> getPersonnelByTitle(String title);
+    public List<Personnel> getAllPersonnel();
 }
